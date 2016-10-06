@@ -1,0 +1,25 @@
+To use the TRC CounterIntelligence Suite, activate the bookmark on any /r/politics topic page. 
+
+The TRC CounterIntelligence Suite has the capability to:
+
+	- Track possible shills
+	- Mark poorly sourced links
+	- Categorize the pro hillary spam
+
+To use the shill tracking feature, find a possible shill suspect, and click the "Add Untrusted/Suspected User" button on the TRC CounterIntelligence Menu. Paste or type in the name without and /u/ or /user/ or whatever prefixes and click OK. All posts from that user will now have their username on the second line highlighted red and with a '*'. If a shill is exonerated and you know they are innocent you can remove them from the suspects list by finding them on the dropdown menu under the add button and clicking "Remove Innocent from Suspect List". Posts from that person will no longer recieve special treatment.
+
+To use the poor sourcing feature, click "Add new Bad Source" and enter in a source which you think is considerably poor (such as the daily mail). Click OK and all the posts with that as the domain will have that domain highlighted with red. If you change your mind about a source you can select it on the dropdown below the add button and click "Remove Source from Blacklist"
+
+----------------
+
+!!IMPORTANT!!
+
+To use this application accross multiple reloads you will have to export your DB which contains all your suspect, source, and categorizing information. If you do not do this all your work will be erased when you load a new /r/politics page or close the tab. To use the import/export functionality simply use the import/export buttons
+
+There are two things you can import and export - your watchlist, which contains all your suspected shills and poor sources - and your collection, which contains all your marked (categorized) posts. The "DB" buttons will export and import BOTH these things, so you don't have copy two things at once.
+
+To export, hit one of the export buttons. Your exported and obfuscated information will appear in the text area below the buttons where you can copy it.
+
+Once you have loaded a new page to import your stuff hit the import button and a dialog will appear. Paste your DB text into the dialog and click OK. The page should update to reflect all your current work.
+
+Be sure to save your DB to a text file between collection sessions as your clipboard might be wiped while doing standard browsing of the internet.

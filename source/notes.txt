@@ -1,0 +1,15 @@
+I am painfully aware cleaning is required. Though the application should work in its current state.
+
+General information about how it works:
+
+The TRC CounterIntelligence Suite is in three parts:
+
+- The page parser
+- The database
+- The menu
+
+The database contains two parts, the persistant part, which you can import and export, and the nonpersistant part, which contains information about the current page. The nonpersistent DB gets filtered in to the persistant DB depending on what you do. User input also gets put in the persistant DB.
+
+The page parser navigates the DOM and finds all the information about the posts on your page. This includes the time, comments, poster, source, and net votes. The parser also adds elements to the DOM like the marking buttons, and it highlights suspected shills and bad domains. It also has another component which highlights presidential canidate names.
+
+The menu interacts with the DOM and the database. 

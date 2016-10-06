@@ -1,0 +1,9 @@
+To install the TRC CounterIntelligence Suite:
+
+	1. Find the release you want under releases. To know what you want, go to release/CHOOSE YOUR RELEASE.txt
+	2. Copy the full text of the release you choose. It should be quite long and start with 'javascript:' (minus quotes)
+	3. Create a new bookmark on your browser, call it TRC CounterIntelligence.
+	4. Under where the URL is supposed to be, paste the code you copied earlier
+	5: Finish Bookmark
+
+To activate the TRC CounterIntelligence Suite, simply go to /r/politics topics section (hot, rising, etc) and click the bookmark. As of now there is NO TRC CounterIntel suite that works for comment sections. Sorry about that.
