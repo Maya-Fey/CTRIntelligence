@@ -1,0 +1,8 @@
+Features:
+
+	- New stats display, view vote/comment ratio, net vote gain per min, and comments per min
+	- Internal database now records times
+
+Update Notes:
+
+Because of the database format change, importing 1.0 DB's won't work. Because nobody actually uses this, I haven't written a converter. If you somehow used Beta 1.0 and want a converter message me on reddit or write a request here on git and I'll do it with in 24 hours.
