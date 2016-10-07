@@ -92,7 +92,7 @@ function importCollection(src)
 	if(t[0] != "")
 		for(var i = 0; i < t.length; i++) {
 			var arr2 = t[i].split("!$!");
-			nposts.push([deobfuscate(arr2[0]), deobfuscate(arr2[1]), parseInt(deobfuscate(arr2[2])), parseInt(deobfuscate(arr2[3]))]);
+			nposts.push([deobfuscate(arr2[0]), deobfuscate(arr2[1]), parseInt(deobfuscate(arr2[2])), parseInt(deobfuscate(arr2[3])), deobfuscate(arr2[4])]);
 		}
 		
 	t = arr[2].split('!|!');
@@ -119,7 +119,7 @@ function importCollection(src)
 
 function exportPost(arr)
 {
-	return obfuscate(arr[0]) + "!$!" + obfuscate(arr[1]) + "!$!" + obfuscate(arr[2] + "") + "!$!" + obfuscate(arr[3] + "");
+	return obfuscate(arr[0]) + "!$!" + obfuscate(arr[1]) + "!$!" + obfuscate(arr[2] + "") + "!$!" + obfuscate(arr[3] + "") + obfuscate(arr[4]);
 }
 
 function exportCollection()
@@ -207,7 +207,7 @@ function dbToID(db){return postids[db];};
 function dbFromID(id){for(var i = 0; i < postids.length; i++) if(postids[i] == id) return i; return -1;}
 function posFromID(id) { for(var i = 0; i < ids.length; i++) if(ids[i] == id) return i;}
 function ensureDB(pos) { var rep = dbFromID(ids[pos]); if(rep == -1) { addToDB(pos); return posts.length - 1; } else { return rep; }}
-function addToDB(pos){postids.push(ids[pos]); posts.push([authors[pos].innerHTML, domains[pos].innerHTML, scores[pos], comments[pos]]);}
+function addToDB(pos){postids.push(ids[pos]); posts.push([authors[pos].innerHTML, domains[pos].innerHTML, scores[pos], comments[pos], times[pos]]);}
 function updateToDB(db, pos){posts[db][2] = scores[pos]; posts[db][3] = comments[pos];}
 function isInCat(cat, id) { var db = dbFromID(id); if(db == -1) return false; var arr = cats[cat]; for(var i = 0; i < arr.length; i++) { if(arr[i] == db) return true;} return false;}
 function addCat(cat, id) { cats[cat].push(ensureDB(posFromID(id))); }
