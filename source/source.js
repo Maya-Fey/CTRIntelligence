@@ -513,6 +513,27 @@ function reportScoreTotals()
 	output(text);
 }
 
+function reportCommentTotals()
+{
+	var text = "";
+	var totals = [];
+	var total = 0;
+	var totalp = 0;
+	for(var i = 0; i < catnames.length; i++) {
+		var cat = cats[i];
+		totals.push(0);
+		for(var j = 0; j < cat.length; j++) 
+			totals[i] += posts[cat[j]][POST_COMMENTS];
+		totalp += cat.length;
+	}
+	for(var i = 0; i < catnames.length; i++) 
+		total += totals[i];
+	for(var i = 0; i < catnames.length; i++) 
+		text += catnames[i] + ": " + totals[i] + " (" + ("" + (totals[i] / total)).substr(0, 5) + ") (" + ("" + (totals[i] / cats[i].length)).substr(0, 5) + " avg comments/post)\n";
+	text += "Total : " + total + " (" + ("" + (total / totalp)).substr(0, 5) + " avg comments/post)"; 
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -609,6 +630,10 @@ newRow();
 		t = document.createElement("button");
 		t.setAttribute("onclick", "reportScoreTotals()");
 		t.innerHTML = "Score Totals";
+		col.appendChild(t);
+		t = document.createElement("button");
+		t.setAttribute("onclick", "reportCommentTotals()");
+		t.innerHTML = "Comment Totals";
 		col.appendChild(t);
 		
 newRow();
