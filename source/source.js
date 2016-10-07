@@ -316,8 +316,22 @@ for(var i = 0; i < raw.length; i++)
 	var tagline = getElementByClassUnique(entry, "tagline");
 	authors[i] = getElementByClassUnique(tagline, "author");
 	times[i] = getElementByClassUnique(tagline, "live-timestamp").getAttribute("title");
-	tagline.insertBefore(document.createTextNode(" [" + times[i] + "] "), tagline.childNodes[2]);
 	var buttons = getElementByClassUnique(entry, "buttons");
+	var comments_proto = getElementByClassUnique(getElementByClassUnique(buttons, "first"), "comments").innerHTML;
+	if(comments_proto == "comment")
+		comments[i] = 0;
+	else 
+		comments[i] = parseInt(comments_proto.split(' ')[0]);
+	scores[i] = parseInt(getElementByClassUnique(getElementByClassUnique(thing, "midcol"), "unvoted").innerHTML);
+	
+	tagline.insertBefore(document.createTextNode(" [" + times[i] + "] "), tagline.childNodes[2]);
+	tagline.setAttribute("style", "color: black");
+	var stats = document.createElement("p");
+	entry.insertBefore(stats, getElementByClassUnique(entry, "flat-list"));
+	stats.setAttribute("class", "tagline");
+	stats.setAttribute("style", "color: black");
+	stats.innerHTML = "V/C ratio: " + ("" + (scores[i] / comments[i])).substr(0, 3); 
+	
 	for(var j = 0; j < catnames.length; j++)
 	{
 		var li = document.createElement("li");
@@ -329,12 +343,6 @@ for(var i = 0; i < raw.length; i++)
 		else 
 			makeAddBtn(button, j, thing.id);
 	}
-	var comments_proto = getElementByClassUnique(getElementByClassUnique(buttons, "first"), "comments").innerHTML;
-	if(comments_proto == "comment")
-		comments[i] = 0;
-	else 
-		comments[i] = parseInt(comments_proto.split(' ')[0]);
-	scores[i] = parseInt(getElementByClassUnique(getElementByClassUnique(thing, "midcol"), "unvoted").innerHTML);
 	
 	var title = titles[i].innerHTML.split(" ");
 	var tnew = "";
