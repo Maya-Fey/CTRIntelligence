@@ -508,8 +508,8 @@ function reportScoreTotals()
 	for(var i = 0; i < catnames.length; i++) 
 		total += totals[i];
 	for(var i = 0; i < catnames.length; i++) 
-		text += catnames[i] + ": " + totals[i] + " (" + ("" + (totals[i] / total)).substr(0, 5) + ") (" + ("" + (totals[i] / cat[i].length)).substr(0, 5) + " avg score/post)\n";
-	text += "Total : " + total + " (" + (total / totalp)).substr(0, 5) + " avg score/post)"; 
+		text += catnames[i] + ": " + totals[i] + " (" + ("" + (totals[i] / total)).substr(0, 5) + ") (" + ("" + (totals[i] / cats[i].length)).substr(0, 5) + " avg score/post)\n";
+	text += "Total : " + total + " (" + ("" + (total / totalp)).substr(0, 5) + " avg score/post)"; 
 	output(text);
 }
 
@@ -605,6 +605,10 @@ newRow();
 		t = document.createElement("button");
 		t.setAttribute("onclick", "reportCatTotals()");
 		t.innerHTML = "Category Totals";
+		col.appendChild(t);
+		t = document.createElement("button");
+		t.setAttribute("onclick", "reportScoreTotals()");
+		t.innerHTML = "Score Totals";
 		col.appendChild(t);
 		
 newRow();
