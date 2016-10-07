@@ -119,7 +119,7 @@ function importCollection(src)
 
 function exportPost(arr)
 {
-	return obfuscate(arr[0]) + "!$!" + obfuscate(arr[1]) + "!$!" + obfuscate(arr[2] + "") + "!$!" + obfuscate(arr[3] + "") + obfuscate(arr[4]);
+	return obfuscate(arr[0]) + "!$!" + obfuscate(arr[1]) + "!$!" + obfuscate(arr[2] + "") + "!$!" + obfuscate(arr[3] + "") + "!$!" + obfuscate(arr[4]);
 }
 
 function exportCollection()
