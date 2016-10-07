@@ -6,6 +6,12 @@ var cats = [[],[],[],[]];
 var posts = [];
 var postids = [];
 
+var POST_AUTHOR = 0;
+var POST_DOMAIN = 1;
+var POST_SCORE = 2;
+var POST_COMMENTS = 3;
+var POST_TIME = 4;
+
 var suspects = [];
 var badnews = ["buzzfeed.com", "dailymail.co.uk", "hillaryclinton.com"];
 
@@ -481,6 +487,27 @@ function reportCatTotals()
 	for(var i = 0; i < catnames.length; i++)
 		text += catnames[i] + ": " + totals[i] + " (" + ("" + (100 * (totals[i] / total))).substr(0, 5) + "%)\n";
 	text += "Total: " + total;
+	output(text);
+}
+
+function reportScoreTotals()
+{
+	var text = "";
+	var totals = [];
+	var total = 0;
+	var totalp = 0;
+	for(var i = 0; i < catnames.length; i++) {
+		var cat = cats[i];
+		totals.push(0);
+		for(var j = 0; j < cat.length; j++) 
+			totals[i] += posts[cat[j]][POST_SCORE];
+		totalp += cat.length;
+	}
+	for(var i = 0; i < catnames.length; i++) 
+		total += totals[i];
+	for(var i = 0; i < catnames.length; i++) 
+		text += catnames[i] + ": " + totals[i] + " (" + ("" + (totals[i] / total)).substr(0, 5) + ") (" + ("" + (totals[i] / cat[i].length)).substr(0, 5) + " avg score/post)\n";
+	text += "Total : " + total + " (" + (total / totalp)).substr(0, 5) + " avg score/post)"; 
 	output(text);
 }
 
