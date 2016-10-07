@@ -330,7 +330,8 @@ for(var i = 0; i < raw.length; i++)
 	entry.insertBefore(stats, getElementByClassUnique(entry, "flat-list"));
 	stats.setAttribute("class", "tagline");
 	stats.setAttribute("style", "color: black");
-	stats.innerHTML = "V/C ratio: " + ("" + (scores[i] / comments[i])).substr(0, 3); 
+	var minsago = (new Date() - new Date(times[i])) / (1000 * 60);
+	stats.innerHTML = "V/C ratio: " + ("" + (scores[i] / comments[i])).substr(0, 4) + " Score gain per hour: " + ("" + (scores[i] / minsago)).substr(0, 4) + " Comments per hour: " + ("" + (comments[i] / minsago)).substr(0, 4);
 	
 	for(var j = 0; j < catnames.length; j++)
 	{
