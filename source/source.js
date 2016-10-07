@@ -329,6 +329,8 @@ for(var i = 0; i < raw.length; i++)
 	else 
 		comments[i] = parseInt(comments_proto.split(' ')[0]);
 	scores[i] = parseInt(getElementByClassUnique(getElementByClassUnique(thing, "midcol"), "unvoted").innerHTML);
+	if(isNaN(scores[i]))
+		scores[i] = 0;
 	
 	tagline.insertBefore(document.createTextNode(" [" + times[i] + "] "), tagline.childNodes[2]);
 	tagline.setAttribute("style", "color: black");
