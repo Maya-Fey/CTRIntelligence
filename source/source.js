@@ -321,7 +321,7 @@ for(var i = 0; i < raw.length; i++)
 	ids[i] = thing.id;
 	var tagline = getElementByClassUnique(entry, "tagline");
 	authors[i] = getElementByClassUnique(tagline, "author");
-	times[i] = getElementByClassUnique(tagline, "live-timestamp").getAttribute("title");
+	times[i] = tagline.childNodes[1].getAttribute("title");
 	var buttons = getElementByClassUnique(entry, "buttons");
 	var comments_proto = getElementByClassUnique(getElementByClassUnique(buttons, "first"), "comments").innerHTML;
 	if(comments_proto == "comment")
