@@ -1,0 +1,1 @@
+This release was pushed mainly because of a bug that caused posts older than 1 day to fuck up the bookmarklet. The features included by conincidence are still experimental.
