@@ -209,6 +209,8 @@ function updateNewDB()
 	}
 }
 
+var punc = [',', ':', ';', '.', '"', "'", '(', ')', '-', '*', '@', '?', '!'];
+
 function dbToID(db){return postids[db];};
 function dbFromID(id){for(var i = 0; i < postids.length; i++) if(postids[i] == id) return i; return -1;}
 function posFromID(id) { for(var i = 0; i < ids.length; i++) if(ids[i] == id) return i;}
@@ -220,7 +222,8 @@ function addCat(cat, id) { cats[cat].push(ensureDB(posFromID(id))); }
 function remCat(cat, id) { var db = dbFromID(id); var arr = cats[cat]; for(var i = 0; i < arr.length; i++) if(arr[i] == db) { arr.splice(i, 1); break; } }
 function contains(arr, thing) { for(var i = 0; i < arr.length; i++) { if(arr[i] == thing) return true; } return false; }
 function getElementByClassUnique(thing, classname) { var childs = thing.childNodes; for(var i = 0; i < childs.length; i++) { if(contains(childs[i].nodeType == 1 && childs[i].className.split(' '), classname)) return childs[i]; }}
-function prepareCompare(thing) { if(thing.charAt(thing.length - 1) == 's') thing = thing.slice(0, thing.length - 1); if(thing.charAt(thing.length - 1) == ':') thing = thing.slice(0, thing.length - 1); if(thing.charAt(thing.length - 1) == "'") thing = thing.slice(0, thing.length - 1); return thing;}
+function prepareCompare(thing) { for(var i = 0; i < punc.length; i++) for(var j = 0; j < thing.length; j++) if(thing.charAt(j) == punc[i]) thing = strSplice(thing, j--); return thing; }
+function strSplice(str, chr) { return str.slice(0, chr) + str.slice(chr + 1, str.length); }
 
 var TH = ["donald", "trump", "hillary", "clinton", "gary", "johnson", "jill", "stein"];
 var CH = ["#F00", "#F00", "#55F", "#55F", "#CC3", "#CC3", "#0A0", "#0A0"];
