@@ -1,0 +1,5 @@
+Features:
+
+	- Fixed bug where posts over 1 day in age would fuck it up
+	- Added 3 more data collection options: score, comments, and VC
+	- Made the name checker more robust
