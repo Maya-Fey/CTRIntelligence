@@ -406,7 +406,7 @@ function newCol()
 
 function addNewSource()
 {
-	var src = prompt("Enter a top level domain name (eg. reddit.com) to be added to the list of untrustworthy sources.\n  ");
+	var src = prompt("Enter a second level domain name (eg. reddit.com) to be added to the list of untrustworthy sources.\n  ");
 	if(src == null || src.length == 0)
 		return;
 	badnews.push(src);
@@ -419,6 +419,10 @@ function addNewSuspect()
 	var sus = prompt("Enter a username (NOT INCLDING THE /u/), for example MayaFey_ to be added to the list of shill suspects.\n     ");
 	if(sus == null || sus.length == 0)
 		return;
+	if(sus == "MayaFey_") {
+		alert("I'm no shill... ;)");
+		return;
+	}
 	suspects.push(sus);
 	updateAuthors();
 	updateSuspectSelect();
@@ -440,6 +444,7 @@ function imprisonHillary()
 
 var sourceSelect = document.createElement("select");
 var suspectSelect = document.createElement("select");
+var outSelect = document.createElement("select");
 var out = document.createElement("textarea");
 
 function newOption(name)
@@ -554,6 +559,26 @@ function updateSuspectSelect()
 	}
 }
 
+outSelect.appendChild(newOption("Category Totals"));
+outSelect.appendChild(newOption("Vote Totals"));
+outSelect.appendChild(newOption("Comment Totals"));
+
+function doStatistic()
+{
+	switch(outSelect.selectedIndex)
+	{
+		case 0:
+			reportCatTotals();
+			break;
+		case 1:
+			reportScoreTotals();
+			break;
+		case 2: 
+			reportCommentTotals();
+			break;
+	}
+}
+
 newRow();
 	newCol();
 		col.setAttribute("colspan", "4");
@@ -623,17 +648,12 @@ newRow();
 		t.innerHTML = "Export DB";
 		col.appendChild(t);
 	newCol();
+		col.appendChild(outSelect);
+		col.appendChild(document.createElement("br"));
+		col.appendChild(document.createElement("br"));
 		t = document.createElement("button");
-		t.setAttribute("onclick", "reportCatTotals()");
-		t.innerHTML = "Category Totals";
-		col.appendChild(t);
-		t = document.createElement("button");
-		t.setAttribute("onclick", "reportScoreTotals()");
-		t.innerHTML = "Score Totals";
-		col.appendChild(t);
-		t = document.createElement("button");
-		t.setAttribute("onclick", "reportCommentTotals()");
-		t.innerHTML = "Comment Totals";
+		t.setAttribute("onclick", "doStatistic()");
+		t.innerHTML = "Output Statistic";
 		col.appendChild(t);
 		
 newRow();
