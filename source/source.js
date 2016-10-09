@@ -300,7 +300,6 @@ function updateAuthors()
 			if(!isInCat(3, ids[i])) {
 				addCatCur(3, ids[i]);
 			}
-			break;
 		}
 	}
 }
