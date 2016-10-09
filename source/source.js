@@ -539,6 +539,26 @@ function reportCommentTotals()
 	output(text);
 }
 
+function reportAvVC()
+{
+	var text = "";
+	var avs = [];
+	var rav = 0;
+	for(var i = 0; i < catnames.length; i++) {
+		var cat = cats[i];
+		avs.push(0);
+		for(var j = 0; j < cat.length; j++) 
+			avs[i] += posts[cat[j]][POST_SCORE] / posts[cat[j]][POST_COMMENTS];
+		avs[i] /= cat.length;
+		rav += avs[i];
+	}
+	rav /= catnames.length;
+	for(var i = 0; i < catnames.length; i++) 
+		text += catnames[i] + ": " + ("" + avs[i]).substr(0, 4) + "\n";
+	text += "Total: " + ("" + rav).substr(0, 4);
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -562,6 +582,7 @@ function updateSuspectSelect()
 outSelect.appendChild(newOption("Category Totals"));
 outSelect.appendChild(newOption("Vote Totals"));
 outSelect.appendChild(newOption("Comment Totals"));
+outSelect.appendChild(newOption("Average V/C Ratio"));
 
 function doStatistic()
 {
@@ -575,6 +596,9 @@ function doStatistic()
 			break;
 		case 2: 
 			reportCommentTotals();
+			break;
+		case 3: 
+			reportAvVC();
 			break;
 	}
 }
