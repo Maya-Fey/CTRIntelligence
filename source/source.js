@@ -234,14 +234,16 @@ var entries = [];
 var titles = [];
 var domains = [];
 var authors = [];
-var authornames = [];
 var comments = [];
 var scores = [];
 var times = [];
 
+var authornames = [];
+var sourcenames = [];
 var authorlist = [[],[]];
+var sourcelist = [[],[]];
 
-function incAuthorList(author) { for(var i = 0; i < authorlist[0].length; i++) if(authorlist[0][i] == author) { authorlist[1][i]++; return; } authorlist[0].push(author); authorlist[1].push(1); }
+function incList(list, thing) { for(var i = 0; i < list[0].length; i++) if(list[0][i] == thing) { list[1][i]++; return; } list[0].push(thing); list[1].push(1); }
 
 function addCatCur(cat, id) { addCat(cat, id); var btn = document.getElementById(catnames[cat] + id); makeRemBtn(btn, cat, id); }
 function remCatCur(cat, id) { remCat(cat, id); var btn = document.getElementById(catnames[cat] + id); makeAddBtn(btn, cat, id); }
@@ -270,17 +272,18 @@ function updateSources()
 	{
 		var ele = domains[i];
 		ele.setAttribute("style", "");
-		var check = domains[i].innerHTML;
-		if(domains[i].innerHTML.charAt(check.length - 1) == '*') 
-			domains[i].innerHTML = check = check.slice(0, check.length - 1);
-		if(check.substr(0, 11) == "youtube.com")
-			check = "youtube.com";
+		var check = domains[i].innerHTML = sourcenames[i];
 		for(var j = 0; j < badnews.length; j++) 
 			if(badnews[j] == check) {
 				ele.setAttribute("style", "text-decoration: underline; font-weight: bold; color: red;");
 				ele.innerHTML += "*";
 				break;
 			} 
+		var auth = -1;
+		while(true) 
+			if(check == sourcelist[0][++auth])
+				break;
+		ele.innerHTML += " (" + sourcelist[1][auth] + ")";
 	}
 }
 
@@ -327,12 +330,14 @@ for(var i = 0; i < raw.length; i++)
 	var entry = entries[i] = getElementByClassUnique(thing, "entry");
 	var tentry = getElementByClassUnique(entry, "title");
 	domains[i] = getElementByClassUnique(tentry, "domain").childNodes[1];
+	sourcenames.push(domains[i].innerHTML);
+	incList(sourcelist, domains[i].innerHTML);
 	titles[i] = getElementByClassUnique(tentry, "title");
 	ids[i] = thing.id;
 	var tagline = getElementByClassUnique(entry, "tagline");
 	authors[i] = getElementByClassUnique(tagline, "author");
 	authornames.push(authors[i].innerHTML);
-	incAuthorList(authors[i].innerHTML);
+	incList(authorlist, authors[i].innerHTML);
 	times[i] = tagline.childNodes[1].getAttribute("title");
 	var buttons = getElementByClassUnique(entry, "buttons");
 	var comments_proto = getElementByClassUnique(getElementByClassUnique(buttons, "first"), "comments").innerHTML;
