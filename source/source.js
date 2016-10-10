@@ -238,6 +238,10 @@ var comments = [];
 var scores = [];
 var times = [];
 
+var authorlist = [[],[]];
+
+function incAuthorList(author) { for(var i = 0; i < authorlist[0].length; i++) if(authorlist[0][i] == author) { authorlist[1][i]++; return; } authorlist[0].push(author); authorlist[1].push(1); }
+
 function addCatCur(cat, id) { addCat(cat, id); var btn = document.getElementById(catnames[cat] + id); makeRemBtn(btn, cat, id); }
 function remCatCur(cat, id) { remCat(cat, id); var btn = document.getElementById(catnames[cat] + id); makeAddBtn(btn, cat, id); }
 function makeAddBtn(button, cat, id) { button.id = catnames[cat] + id; button.setAttribute("style", "border: 1px solid white; color: white; background-color: " + catbtne[cat] + "; margin: 2px auto"); button.setAttribute("onclick", "addCatCur(" + cat + ", '" + id + "')"); button.innerHTML = "Mark as " + catnames[cat]; updateID(id); }
@@ -301,6 +305,11 @@ function updateAuthors()
 				addCatCur(3, ids[i]);
 			}
 		}
+		var auth = -1;
+		while(true) 
+			if(check == authorlist[0][++auth])
+				break;
+		ele.innerHTML += " (" + authorlist[1][auth] + ")";
 	}
 }
 
@@ -323,6 +332,7 @@ for(var i = 0; i < raw.length; i++)
 	ids[i] = thing.id;
 	var tagline = getElementByClassUnique(entry, "tagline");
 	authors[i] = getElementByClassUnique(tagline, "author");
+	incAuthorList(authors[i].innerHTML);
 	times[i] = tagline.childNodes[1].getAttribute("title");
 	var buttons = getElementByClassUnique(entry, "buttons");
 	var comments_proto = getElementByClassUnique(getElementByClassUnique(buttons, "first"), "comments").innerHTML;
