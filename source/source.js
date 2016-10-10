@@ -234,6 +234,7 @@ var entries = [];
 var titles = [];
 var domains = [];
 var authors = [];
+var authornames = [];
 var comments = [];
 var scores = [];
 var times = [];
@@ -289,9 +290,7 @@ function updateAuthors()
 	{
 		var ele = authors[i];
 		ele.setAttribute("style", "");
-		var check = authors[i].innerHTML;
-		if(authors[i].innerHTML.charAt(check.length - 1) == '*') 
-			authors[i].innerHTML = check = check.slice(0, check.length - 1);
+		var check = authors[i].innerHTML = authornames[i];
 		for(var j = 0; j < suspects.length; j++) 
 			if(suspects[j] == check) {
 				ele.setAttribute("style", "text-decoration: underline; font-weight: bold; color: red;");
@@ -332,6 +331,7 @@ for(var i = 0; i < raw.length; i++)
 	ids[i] = thing.id;
 	var tagline = getElementByClassUnique(entry, "tagline");
 	authors[i] = getElementByClassUnique(tagline, "author");
+	authornames.push(authors[i].innerHTML);
 	incAuthorList(authors[i].innerHTML);
 	times[i] = tagline.childNodes[1].getAttribute("title");
 	var buttons = getElementByClassUnique(entry, "buttons");
