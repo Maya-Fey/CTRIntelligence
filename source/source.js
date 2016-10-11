@@ -708,5 +708,5 @@ newRow();
 		col.setAttribute("colspan", "4");
 		t = document.createElement("p");
 		t.setAttribute("style", "text-align: center;");
-		t.innerHTML = "TRC CounterIntelligence Suite version Beta 1.2, made by <a href=\"https://www.reddit.com/user/MayaFey_\">/u/MayaFey_</a>";
+		t.innerHTML = "TRC CounterIntelligence Suite version Beta 1.3, made by <a href=\"https://www.reddit.com/user/MayaFey_\">/u/MayaFey_</a>";
 		col.appendChild(t);

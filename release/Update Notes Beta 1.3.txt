@@ -1,0 +1,3 @@
+	- Added user and domain tracking feature: How many times they are on the page will be shown.
+	- Fixed corner case username processing bug
+	- Reformed inner soft DB for better usability and speed
