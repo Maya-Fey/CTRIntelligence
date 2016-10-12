@@ -622,6 +622,14 @@ function reportSuspects()
 	output(text);
 }
 
+function reportBadnews()
+{
+	text = "";
+	for(var i = 0; i < badnews.length; i++)
+		text += badnews[i] + "\n";
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -647,6 +655,7 @@ outSelect.appendChild(newOption("Vote Totals"));
 outSelect.appendChild(newOption("Comment Totals"));
 outSelect.appendChild(newOption("Average V/C Ratio"));
 outSelect.appendChild(newOption("Full Suspect List"));
+outSelect.appendChild(newOption("Bad Source List"));
 
 dataSelect.appendChild(newOption("Suspect List"));
 dataSelect.appendChild(newOption("Post Collection"));
@@ -670,6 +679,9 @@ function doStatistic()
 			break;
 		case 4:
 			reportSuspects();
+			break;
+		case 5:
+			reportBadnews();
 			break;
 	}
 }
@@ -695,13 +707,13 @@ function doImport()
 	switch(dataSelect.selectedIndex)
 	{
 		case 0:
-			output(getWatchlist());
+			getWatchlist();
 			break;
 		case 1:
-			output(getCollection());
+			getCollection();
 			break;
 		case 2:
-			output(getDB());
+			getDB();
 			break;
 	}
 }
