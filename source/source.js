@@ -718,6 +718,38 @@ function doImport()
 	}
 }
 
+function doSave()
+{
+	switch(dataSelect.selectedIndex)
+	{
+		case 0:
+			storeSuspects();
+			break;
+		case 1:
+			storeCollection();
+			break;
+		case 2:
+			storeDB();
+			break;
+	}
+}
+
+function doLoad()
+{
+	switch(dataSelect.selectedIndex)
+	{
+		case 0:
+			loadSuspects();
+			break;
+		case 1:
+			loadCollection();
+			break;
+		case 2:
+			loadDB();
+			break;
+	}
+}
+
 newRow();
 	newCol();
 		col.setAttribute("colspan", "4");
@@ -768,6 +800,16 @@ newRow();
 		t = document.createElement("button");
 		t.setAttribute("onclick", "doExport();");
 		t.innerHTML = "Export";
+		col.appendChild(t);
+		col.appendChild(document.createElement("br"));
+		col.appendChild(document.createElement("br"));
+		t = document.createElement("button");
+		t.setAttribute("onclick", "doLoad();");
+		t.innerHTML = "Load";
+		col.appendChild(t);
+		t = document.createElement("button");
+		t.setAttribute("onclick", "doSave();");
+		t.innerHTML = "Save";
 		col.appendChild(t);
 	newCol();
 		col.appendChild(outSelect);
