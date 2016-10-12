@@ -441,6 +441,11 @@ function addNewSource()
 	var src = prompt("Enter a second level domain name (eg. reddit.com) to be added to the list of untrustworthy sources.\n  ");
 	if(src == null || src.length == 0)
 		return;
+	for(var i = 0; i < badnews.length; i++)
+		if(src == badnews[i]) {
+			alert("You already have that source marked as untrusted");
+			return;
+		}
 	badnews.push(src);
 	updateSources();
 	updateSourceSelect();
@@ -455,6 +460,11 @@ function addNewSuspect()
 		alert("I'm no shill... ;)");
 		return;
 	}
+	for(var i = 0; i < suspects.length; i++)
+		if(src == suspects[i]) {
+			alert("You already have that person marked as a shill");
+			return;
+		}
 	suspects.push(sus);
 	updateAuthors();
 	updateSuspectSelect();
