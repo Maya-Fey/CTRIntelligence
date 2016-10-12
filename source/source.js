@@ -73,10 +73,7 @@ function getWatchlist()
 	if(src == null || src.length == 0)
 		return;
 	importWatchlist(src);
-	updateSources();
-	updateAuthors();
-	updateSourceSelect();
-	updateSuspectSelect();
+	updateSuspectRelations(true);
 }
 
 function importCollection(src)
@@ -166,8 +163,7 @@ function getCollection()
 	if(src == null || src.length == 0)
 		return;
 	importCollection(src);
-	updateCats();
-	updateNewDB();
+	updateCollectionRelations(true);
 }
 
 function exportDB()
@@ -192,12 +188,8 @@ function getDB()
 	if(str == null || str.length == 0)
 		return;
 	importDB(str);
-	updateCats();
-	updateSources();
-	updateAuthors();
-	updateSourceSelect();
-	updateSuspectSelect();
-	updateNewDB();
+	updateSuspectRelations(true);
+	updateCollectionRelations(true);
 }
 
 function updateNewDB()
@@ -222,6 +214,7 @@ function loadSuspects()
 		return;
 	}
 	importWatchlist(out);
+	updateSuspectRelations(true);
 }
 
 function storeCollection()
@@ -237,6 +230,7 @@ function loadCollection()
 		return;
 	}
 	importCollection(out);
+	updateCollectionRelations(true);
 }
 
 function storeDB()
@@ -249,6 +243,22 @@ function loadDB()
 {
 	loadSuspects();
 	loadCollection();
+	updateCollectionRelations(true);
+	updateSuspectRelations(true);
+}
+
+function updateSuspectRelations(load /* Param for future autosaving purposes */)
+{
+	updateSources();
+	updateAuthors();
+	updateSourceSelect();
+	updateSuspectSelect();
+}
+
+function updateCollectionRelations(load /* Param for future autosaving purposes */)
+{
+	updateCats();
+	updateNewDB();
 }
 
 var punc = [',', ':', ';', '.', '"', "'", '(', ')', '-', '*', '@', '?', '!'];
