@@ -477,6 +477,7 @@ function imprisonHillary()
 var sourceSelect = document.createElement("select");
 var suspectSelect = document.createElement("select");
 var outSelect = document.createElement("select");
+var dataSelect = document.createElement("select");
 var out = document.createElement("textarea");
 
 function newOption(name)
@@ -496,21 +497,6 @@ suspectSelect.appendChild(t);
 function output(str)
 {
 	out.value = str;
-}
-
-function reportWatchlist()
-{
-	output(exportWatchlist());
-}
-
-function reportCollection()
-{
-	output(exportCollection());
-}
-
-function reportDB()
-{
-	output(exportDB());
 }
 
 function reportCatTotals()
@@ -616,6 +602,10 @@ outSelect.appendChild(newOption("Vote Totals"));
 outSelect.appendChild(newOption("Comment Totals"));
 outSelect.appendChild(newOption("Average V/C Ratio"));
 
+dataSelect.appendChild(newOption("Suspect List"));
+dataSelect.appendChild(newOption("Post Collection"));
+dataSelect.appendChild(newOption("Full DB"));
+
 function doStatistic()
 {
 	switch(outSelect.selectedIndex)
@@ -631,6 +621,38 @@ function doStatistic()
 			break;
 		case 3: 
 			reportAvVC();
+			break;
+	}
+}
+
+function doExport()
+{
+	switch(dataSelect.selectedIndex)
+	{
+		case 0:
+			output(exportWatchlist());
+			break;
+		case 1:
+			output(exportCollection());
+			break;
+		case 2:
+			output(exportDB());
+			break;
+	}
+}
+
+function doImport()
+{
+	switch(dataSelect.selectedIndex)
+	{
+		case 0:
+			output(getWatchlist());
+			break;
+		case 1:
+			output(getCollection());
+			break;
+		case 2:
+			output(getDB());
 			break;
 	}
 }
@@ -675,33 +697,16 @@ newRow();
 		t.setAttribute("onclick", "imprisonHillary();");
 		col.appendChild(t);
 	newCol();
-		t = document.createElement("button");
-		t.setAttribute("onclick", "getWatchlist();");
-		t.innerHTML = "Import Watchlist";
-		col.appendChild(t);
-		t = document.createElement("button");
-		t.setAttribute("onclick", "reportWatchlist();");
-		t.innerHTML = "Export Watchlist";
-		col.appendChild(t);
+		col.appendChild(dataSelect);
 		col.appendChild(document.createElement("br"));
 		col.appendChild(document.createElement("br"));
 		t = document.createElement("button");
-		t.setAttribute("onclick", "getCollection();");
-		t.innerHTML = "Import Collection";
+		t.setAttribute("onclick", "goImport();");
+		t.innerHTML = "Import";
 		col.appendChild(t);
 		t = document.createElement("button");
-		t.setAttribute("onclick", "reportCollection();");
-		t.innerHTML = "Export Collection";
-		col.appendChild(t);
-		col.appendChild(document.createElement("br"));
-		col.appendChild(document.createElement("br"));
-		t = document.createElement("button");
-		t.setAttribute("onclick", "getDB();");
-		t.innerHTML = "Import DB";
-		col.appendChild(t);
-		t = document.createElement("button");
-		t.setAttribute("onclick", "reportDB();");
-		t.innerHTML = "Export DB";
+		t.setAttribute("onclick", "doExport();");
+		t.innerHTML = "Export";
 		col.appendChild(t);
 	newCol();
 		col.appendChild(outSelect);
