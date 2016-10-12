@@ -7,13 +7,8 @@ Right now the TRC CounterIntelligence Suite is capable of:
 	- Tracking shills 
 	- Tracking shittily sourced links
 	- Categorizing posts
+	- Sharing your suspects with others
 	
-------------
-
-READ THIS NOW, THIS IS IMPORTANT:
-
-As it is a javascript bookmarklet, this application stores no data on your computer. THIS MEANS YOU MUST MANUALLY EXPORT YOUR DATABASE USING THE BUTTONS PROVIDED OR YOU'LL LOSE ALL YOUR WORK ON A NEW PAGE LOAD. Refer to USAGE.txt for instructions
-
 ------------
 
 TO INSTALL:

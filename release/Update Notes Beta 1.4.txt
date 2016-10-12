@@ -1,0 +1,3 @@
+New features:
+	- You can now save and load using your browser's internal storage
+	- You can now print the names of your suspects and untrustworthy sources

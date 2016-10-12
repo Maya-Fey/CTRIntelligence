@@ -1,8 +1,10 @@
 Unless you have an explicit reason otherwise, choosing the lastest version is best. The latest version right now is Beta 1.0, although the latest version will always be in a folder called 'latest', alongside a folder with the version name. 
 
-There will be two releases in each. One called VERSION.js, and the other called VERSION-auto.js
+There are three releases in each. One called VERSION.js, one called VERSION-auto.js, and another called VERSION-autoload.js.
 
 The 'auto' version is simply one where it will automatically ask you to import a database when you activate the bookmark. This may save you time depending on your workflow.
+
+The 'autoload' version will automatically load your DB from your browsers' local storage if you have one saved. This variant is not present before Beta 1.4, as the save/load functionality did not exist at the time.
 
 For installation instructions, go to INSTALL.txt on the root directory.
 For usage information, go to USAGE.txt on the root directory.
