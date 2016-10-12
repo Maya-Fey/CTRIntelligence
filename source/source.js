@@ -488,7 +488,7 @@ function addNewSuspect()
 		return;
 	}
 	for(var i = 0; i < suspects.length; i++)
-		if(src == suspects[i]) {
+		if(sus == suspects[i]) {
 			alert("You already have that person marked as a shill");
 			return;
 		}
@@ -614,6 +614,14 @@ function reportAvVC()
 	output(text);
 }
 
+function reportSuspects()
+{
+	text = "";
+	for(var i = 0; i < suspects.length; i++)
+		text += suspects[i] + "\n";
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -638,6 +646,7 @@ outSelect.appendChild(newOption("Category Totals"));
 outSelect.appendChild(newOption("Vote Totals"));
 outSelect.appendChild(newOption("Comment Totals"));
 outSelect.appendChild(newOption("Average V/C Ratio"));
+outSelect.appendChild(newOption("Full Suspect List"));
 
 dataSelect.appendChild(newOption("Suspect List"));
 dataSelect.appendChild(newOption("Post Collection"));
@@ -658,6 +667,9 @@ function doStatistic()
 			break;
 		case 3: 
 			reportAvVC();
+			break;
+		case 4:
+			reportSuspects();
 			break;
 	}
 }
@@ -738,7 +750,7 @@ newRow();
 		col.appendChild(document.createElement("br"));
 		col.appendChild(document.createElement("br"));
 		t = document.createElement("button");
-		t.setAttribute("onclick", "goImport();");
+		t.setAttribute("onclick", "doImport();");
 		t.innerHTML = "Import";
 		col.appendChild(t);
 		t = document.createElement("button");
@@ -751,7 +763,7 @@ newRow();
 		col.appendChild(document.createElement("br"));
 		t = document.createElement("button");
 		t.setAttribute("onclick", "doStatistic()");
-		t.innerHTML = "Output Statistic";
+		t.innerHTML = "Output";
 		col.appendChild(t);
 		
 newRow();
