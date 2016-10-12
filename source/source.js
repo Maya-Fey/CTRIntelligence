@@ -218,10 +218,37 @@ function loadSuspects()
 {
 	var out = localStorage.getItem("suspects");
 	if(out == null) {
-		alert("Suspect list not saved");
+		alert("Stored suspect list not found");
+		return;
+	}
+	importWatchlist(out);
+}
+
+function storeCollection()
+{
+	localStorage.setItem("collection", exportCollection());
+}
+
+function loadCollection()
+{
+	var out = localStorage.getItem("collection");
+	if(out == null) {
+		alert("Stored collection not found");
 		return;
 	}
 	importCollection(out);
+}
+
+function storeDB()
+{
+	storeSuspects();
+	storeCollection();
+}
+
+function loadDB()
+{
+	loadSuspects();
+	loadCollection();
 }
 
 var punc = [',', ':', ';', '.', '"', "'", '(', ')', '-', '*', '@', '?', '!'];
