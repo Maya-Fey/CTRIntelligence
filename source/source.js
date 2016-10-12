@@ -209,6 +209,21 @@ function updateNewDB()
 	}
 }
 
+function storeSuspects()
+{
+	localStorage.setItem("suspects", exportWatchlist());
+}
+
+function loadSuspects()
+{
+	var out = localStorage.getItem("suspects");
+	if(out == null) {
+		alert("Suspect list not saved");
+		return;
+	}
+	importCollection(out);
+}
+
 var punc = [',', ':', ';', '.', '"', "'", '(', ')', '-', '*', '@', '?', '!'];
 
 function dbToID(db){return postids[db];};
