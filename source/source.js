@@ -274,7 +274,7 @@ function addCat(cat, id) { cats[cat].push(ensureDB(posFromID(id))); }
 function remCat(cat, id) { var db = dbFromID(id); var arr = cats[cat]; for(var i = 0; i < arr.length; i++) if(arr[i] == db) { arr.splice(i, 1); break; } }
 function contains(arr, thing) { for(var i = 0; i < arr.length; i++) { if(arr[i] == thing) return true; } return false; }
 function getElementByClassUnique(thing, classname) { var childs = thing.childNodes; for(var i = 0; i < childs.length; i++) { if(contains(childs[i].nodeType == 1 && childs[i].className.split(' '), classname)) return childs[i]; }}
-function prepareCompare(thing) { for(var i = 0; i < punc.length; i++) for(var j = 0; j < thing.length; j++) if(thing.charAt(j) == punc[i]) thing = strSplice(thing, j--); return thing; }
+function prepareCompare(thing) { if(thing.charAt(thing.length - 1) == "s") thing = thing.slice(thing, thing.length - 1); for(var i = 0; i < punc.length; i++) for(var j = 0; j < thing.length; j++) if(thing.charAt(j) == punc[i]) thing = strSplice(thing, j--); return thing; }
 function strSplice(str, chr) { return str.slice(0, chr) + str.slice(chr + 1, str.length); }
 
 var TH = ["donald", "trump", "hillary", "clinton", "gary", "johnson", "jill", "stein"];
@@ -672,14 +672,14 @@ function reportTotalsBySource()
 	var totals = [];
 	var sourcs = [];
 	for(var i = 0; i < posts.length; i++) {
-		var author = posts[i][POST_DOMAIN];
+		var source = posts[i][POST_DOMAIN];
 		for(var j = 0; j < sourcs.length; j++)
-			if(sourcs[j] == author) {
+			if(sourcs[j] == source) {
 				totals[j]++;
-				author = "done";
+				source = "done";
 			}
-		if(author != "done") {
-			sourcs.push(author);
+		if(source != "done") {
+			sourcs.push(source);
 			totals.push(1);
 		}
 	}
