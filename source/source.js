@@ -267,7 +267,7 @@ function dbToID(db){return postids[db];};
 function dbFromID(id){for(var i = 0; i < postids.length; i++) if(postids[i] == id) return i; return -1;}
 function posFromID(id) { for(var i = 0; i < ids.length; i++) if(ids[i] == id) return i;}
 function ensureDB(pos) { var rep = dbFromID(ids[pos]); if(rep == -1) { addToDB(pos); return posts.length - 1; } else { return rep; }}
-function addToDB(pos){postids.push(ids[pos]); posts.push([authors[pos].innerHTML, domains[pos].innerHTML, scores[pos], comments[pos], times[pos]]);}
+function addToDB(pos){postids.push(ids[pos]); posts.push([authornames[pos], sourcenames[pos], scores[pos], comments[pos], times[pos]]);}
 function updateToDB(db, pos){posts[db][2] = scores[pos]; posts[db][3] = comments[pos];}
 function isInCat(cat, id) { var db = dbFromID(id); if(db == -1) return false; var arr = cats[cat]; for(var i = 0; i < arr.length; i++) { if(arr[i] == db) return true;} return false;}
 function addCat(cat, id) { cats[cat].push(ensureDB(posFromID(id))); }
@@ -640,6 +640,33 @@ function reportBadnews()
 	output(text);
 }
 
+function reportTotalsByUser()
+{
+	var totals = [];
+	var authos = [];
+	for(var i = 0; i < posts.length; i++) {
+		var author = posts[i][POST_AUTHOR];
+		for(var j = 0; j < authos.length; j++)
+			if(authos[j] == author) {
+				totals[j]++;
+				author = "done";
+			}
+		if(author != "done") {
+			authos.push(author);
+			totals.push(1);
+		}
+	}
+	for(var i = 0; i < authos.length; i++)
+		for(var j = 0; j < suspects.length; j++)
+			if(authos[i] == suspects[j]) {
+				authos[i] += " (Suspect)";
+			}
+	var text = "";
+	for(var i = 0; i < authos.length; i++)
+		text += authos[i] + ": " + totals[i] + "\n";
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -666,6 +693,7 @@ outSelect.appendChild(newOption("Comment Totals"));
 outSelect.appendChild(newOption("Average V/C Ratio"));
 outSelect.appendChild(newOption("Full Suspect List"));
 outSelect.appendChild(newOption("Bad Source List"));
+outSelect.appendChild(newOption("Post Totals by User"));
 
 dataSelect.appendChild(newOption("Suspect List"));
 dataSelect.appendChild(newOption("Post Collection"));
@@ -692,6 +720,9 @@ function doStatistic()
 			break;
 		case 5:
 			reportBadnews();
+			break;
+		case 6:
+			reportTotalsByUser();
 			break;
 	}
 }
