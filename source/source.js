@@ -15,6 +15,40 @@ var POST_TIME = 4;
 var suspects = [];
 var badnews = ["buzzfeed.com", "dailymail.co.uk", "hillaryclinton.com"];
 
+function partition(arr, arr2, left, right) 
+{
+    var pivot = arr[(left + right) >>> 1];
+    while(left <= right) {
+        while(arr[left] > pivot) { left++; }
+        while(arr[right] < pivot) { right--; }
+        if(left <= right) {
+            var temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+			var temp = arr2[left];
+			arr2[left++] = arr2[right];
+            arr2[right--] = temp;
+        }
+    }
+    return left;
+}
+
+function round(arr, arr2, left, right)
+{
+    var mid = partition(arr, arr2, left, right);
+    if(left < mid - 1) {
+        round(arr, arr2, left, mid - 1);
+    }
+    if(right > mid) {
+        round(arr, arr2, mid, right);
+    }
+}
+
+function sortDuo(arr, arr2) 
+{
+    round(arr, arr2, 0, arr.length - 1);
+}
+
 function obfuscate(str)
 {
 	var charr = [];
@@ -661,6 +695,7 @@ function reportTotalsByUser()
 			if(authos[i] == suspects[j]) {
 				authos[i] += " (Suspect)";
 			}
+	sortDuo(totals, authos);
 	var text = "";
 	for(var i = 0; i < authos.length; i++)
 		text += authos[i] + ": " + totals[i] + "\n";
@@ -688,6 +723,7 @@ function reportTotalsBySource()
 			if(sourcs[i] == badnews[j]) {
 				sourcs[i] += " (Poor Source)";
 			}
+	sortDuo(totals, sourcs);
 	var text = "";
 	for(var i = 0; i < sourcs.length; i++)
 		text += sourcs[i] + ": " + totals[i] + "\n";
@@ -752,7 +788,7 @@ function doStatistic()
 		case 6:
 			reportTotalsByUser();
 			break;
-		case 6:
+		case 7:
 			reportTotalsBySource();
 			break;
 	}
