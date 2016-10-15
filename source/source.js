@@ -667,6 +667,33 @@ function reportTotalsByUser()
 	output(text);
 }
 
+function reportTotalsBySource()
+{
+	var totals = [];
+	var sourcs = [];
+	for(var i = 0; i < posts.length; i++) {
+		var author = posts[i][POST_DOMAIN];
+		for(var j = 0; j < sourcs.length; j++)
+			if(sourcs[j] == author) {
+				totals[j]++;
+				author = "done";
+			}
+		if(author != "done") {
+			sourcs.push(author);
+			totals.push(1);
+		}
+	}
+	for(var i = 0; i < sourcs.length; i++)
+		for(var j = 0; j < badnews.length; j++)
+			if(sourcs[i] == badnews[j]) {
+				sourcs[i] += " (Poor Source)";
+			}
+	var text = "";
+	for(var i = 0; i < sourcs.length; i++)
+		text += sourcs[i] + ": " + totals[i] + "\n";
+	output(text);
+}
+
 function updateSourceSelect()
 {
 	var l = sourceSelect.childNodes.length - 1;
@@ -694,6 +721,7 @@ outSelect.appendChild(newOption("Average V/C Ratio"));
 outSelect.appendChild(newOption("Full Suspect List"));
 outSelect.appendChild(newOption("Bad Source List"));
 outSelect.appendChild(newOption("Post Totals by User"));
+outSelect.appendChild(newOption("Post Totals by Source"));
 
 dataSelect.appendChild(newOption("Suspect List"));
 dataSelect.appendChild(newOption("Post Collection"));
@@ -723,6 +751,9 @@ function doStatistic()
 			break;
 		case 6:
 			reportTotalsByUser();
+			break;
+		case 6:
+			reportTotalsBySource();
 			break;
 	}
 }
