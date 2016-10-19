@@ -1,0 +1,3 @@
+New features:
+	- You can now output post totals by user/source
+	- You can now see the total posts by user/source in the DB next to the page total, for easier tracking of repeat shills.

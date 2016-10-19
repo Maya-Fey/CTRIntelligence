@@ -1,4 +1,4 @@
-To use the TRC CounterIntelligence Suite, activate the bookmark on any /r/politics topic page. 
+To use the TRC CounterIntelligence Suite, activate the bookmark on any /r/politics topic page. Alternatively, this application can be used on other subs. 
 
 The TRC CounterIntelligence Suite has the capability to:
 
