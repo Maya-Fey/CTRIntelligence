@@ -386,7 +386,16 @@ function updateSources()
 		while(true) 
 			if(check == sourcelist[0][++auth])
 				break;
-		ele.innerHTML += " (" + sourcelist[1][auth] + ")";
+		var auth1 = -1;
+		while(true) 
+			if(check == sourceusage[0][++auth1]) {
+				auth1 = sourceusage[1][auth1];
+				break;
+			} else if(auth1 >= sourceusage[0].length) {
+				auth1 = 0;
+				break;
+			}
+		ele.innerHTML += " (" + sourcelist[1][auth] + ',<span style="color:red;">' + auth1 + "</span>)";
 	}
 }
 
@@ -414,7 +423,16 @@ function updateAuthors()
 		while(true) 
 			if(check == authorlist[0][++auth])
 				break;
-		ele.innerHTML += " (" + authorlist[1][auth] + ")";
+		var auth1 = -1;
+		while(true) 
+			if(check == authorusage[0][++auth1]) {
+				auth1 = authorusage[1][auth1];
+				break;
+			} else if(auth1 >= authorusage[0].length) {
+				auth1 = 0;
+				break;
+			}
+		ele.innerHTML += " (" + authorlist[1][auth] + ',<span style="color:red;">' + auth1 + "</span>)";
 	}
 }
 
