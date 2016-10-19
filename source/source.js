@@ -6,6 +6,9 @@ var cats = [[],[],[],[]];
 var posts = [];
 var postids = [];
 
+var authorusage = [[], []];
+var sourceusage = [[], []];
+
 var POST_AUTHOR = 0;
 var POST_DOMAIN = 1;
 var POST_SCORE = 2;
@@ -291,8 +294,22 @@ function updateSuspectRelations(load /* Param for future autosaving purposes */)
 
 function updateCollectionRelations(load /* Param for future autosaving purposes */)
 {
+	if(load) {
+		updateCounters();
+	}
 	updateCats();
 	updateNewDB();
+}
+
+function updateCounters()
+{
+	authorusage = [[],[]];
+	sourceusage = [[],[]];
+	for(var i = 0; i < posts.length; i++)
+	{
+		incList(authorusage, posts[i][POST_AUTHOR]);
+		incList(sourceusage, posts[i][POST_DOMAIN]);
+	}
 }
 
 var punc = [',', ':', ';', '.', '"', "'", '(', ')', '-', '*', '@', '?', '!'];
@@ -301,7 +318,7 @@ function dbToID(db){return postids[db];};
 function dbFromID(id){for(var i = 0; i < postids.length; i++) if(postids[i] == id) return i; return -1;}
 function posFromID(id) { for(var i = 0; i < ids.length; i++) if(ids[i] == id) return i;}
 function ensureDB(pos) { var rep = dbFromID(ids[pos]); if(rep == -1) { addToDB(pos); return posts.length - 1; } else { return rep; }}
-function addToDB(pos){postids.push(ids[pos]); posts.push([authornames[pos], sourcenames[pos], scores[pos], comments[pos], times[pos]]);}
+function addToDB(pos){postids.push(ids[pos]); posts.push([authornames[pos], sourcenames[pos], scores[pos], comments[pos], times[pos]]); incList(authorusage, authornames[pos]); incList(sourceusage, sourcenames[pos]);}
 function updateToDB(db, pos){posts[db][2] = scores[pos]; posts[db][3] = comments[pos];}
 function isInCat(cat, id) { var db = dbFromID(id); if(db == -1) return false; var arr = cats[cat]; for(var i = 0; i < arr.length; i++) { if(arr[i] == db) return true;} return false;}
 function addCat(cat, id) { cats[cat].push(ensureDB(posFromID(id))); }
